@@ -1153,6 +1153,7 @@ function library:Evil(text,text2,logo)
 						MainToggle_3:TweenSize(UDim2.new(0, 25, 0, 25),"In","Quad",0.2,true)
 						MainToggle_3.Image = "http://www.roblox.com/asset/?id=6023426926"
                         UICorner_3.CornerRadius = UDim.new(0, 100)
+                        local SoundClick = Instance.new("Sound")
                         SoundClick.Name = "SoundEffect"
 						SoundClick.SoundId = "rbxassetid://130785805"
 						SoundClick.Volume = 1
