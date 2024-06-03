@@ -1135,12 +1135,10 @@ function library:Evil(text,text2,logo)
 				TextButton.TextSize = 14.000
 
 				if default == true then
-					Tgo = false
-						MainToggle_3.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-						MainToggle_3.Image = "http://www.roblox.com/asset/?id=00"
+					MainToggle_3.BackgroundColor3 = Color3.fromRGB(113, 255, 78)
 						MainToggle_3:TweenSize(UDim2.new(0, 25, 0, 25),"In","Quad",0.2,true)
-                        UICorner_3.CornerRadius = UDim.new(0, 5)
-					pcall(callback,true)
+						MainToggle_3.Image = "http://www.roblox.com/asset/?id=6023426926"
+                        UICorner_3.CornerRadius = UDim.new(0, 100)
 				end
 
 				TextButton.MouseButton1Click:Connect(function()
