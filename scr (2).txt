@@ -530,11 +530,11 @@ function library:Evil(text,text2,logo)
 		function(io, p)
 			if io.KeyCode == UIConfig.Bind then
 				if uitoggled == false then
-					Main:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, 0.4, true) wait() UI.Enabled = false
+					Main:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, 0.1, true) wait() UI.Enabled = false
 					uitoggled = true
 				else
 					UI.Enabled = true
-					Main:TweenSize(UDim2.new(0, 585, 0, 400), Enum.EasingDirection.Out, Enum.EasingStyle.Quart,,true)
+					Main:TweenSize(UDim2.new(0, 585, 0, 400), Enum.EasingDirection.Out, Enum.EasingStyle.Quart,0.1,true)
 					uitoggled = false
 				end
 			end
