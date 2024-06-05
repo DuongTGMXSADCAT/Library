@@ -1351,7 +1351,7 @@ function library:Evil(text,text2,logo)
 				Text_2.Size = UDim2.new(0, 265, 0, 35)
 				Text_2.ZIndex = 16
 				Text_2.Font = Enum.Font.GothamBold
-				Text_2.Text = getpro()
+				Text_2.Text = default
 				Text_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 				Text_2.TextSize = 13.000
 				Text_2.TextXAlignment = Enum.TextXAlignment.Center
