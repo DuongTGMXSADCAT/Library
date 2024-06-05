@@ -1336,12 +1336,12 @@ function library:Evil(text,text2,logo)
 					if default then
 						if table.find(list, default) then
 							callback(default)
-							return "   "..text .. " : " .. default
+							return default
 						else
-							return "   "..text .. " : "
+							return ""
 						end
 					else
-						return "   "..text .. " : "
+						return ""
 					end
 				end
 				Text_2.Name = "Text"
