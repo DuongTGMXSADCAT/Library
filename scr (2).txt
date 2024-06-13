@@ -1889,7 +1889,9 @@ function library:Evil(text,text2,logo)
 						else
 							CustomValue.Text = tostring(CustomValue.Text and math.floor( (CustomValue.Text / max) * (max - min) + min) )
 						end
-						pcall(callback, CustomValue.Text)
+						pcall(function()
+							callback(CustomValue.Text)
+						end)
 					end)
 					
 					function sliderfunc:Update(value)
