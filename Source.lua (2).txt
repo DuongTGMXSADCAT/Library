@@ -1407,6 +1407,9 @@ function WazureV1:Start(GuiConfig)
     -- GỌI LUÔN resize ngay sau khi set text mới
     LabelFunc:AutoSize()
 end
+CountItem = CountItem + 1
+			return LabelFunc
+			end
 		function Items:MakeButton(ButtonName, ButtonConfig)
 			local ButtonConfig = ButtonConfig or {}
 			ButtonConfig.Title = ButtonConfig.Title or "Button"
