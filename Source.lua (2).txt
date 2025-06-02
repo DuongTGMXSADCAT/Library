@@ -1392,21 +1392,21 @@ function WazureV1:Start(GuiConfig)
     UIStroke3.Thickness = 0.2
     UIStroke3.Parent = LabelText
 
-    -- Hàm resize tự động
     function LabelFunc:AutoSize()
         LabelText.TextWrapped = false
         LabelText.Size = UDim2.new(1, 0, 0, 14 + (14 * (LabelText.TextBounds.X // LabelText.AbsoluteSize.X)))
         LabelText.TextWrapped = true
         Label.Size = UDim2.new(1, -8, 0, LabelText.TextBounds.Y + 5)
-        -- UpSize2() đã bị bỏ vì không tồn tại, tránh lỗi dừng script
     end
 
-    -- Hàm set text và tự động resize
     function LabelFunc:Set(Value)
         Value = Value or LabelText.Text
         LabelFunc.Value = Value
         LabelText.Text = tostring(Value)
-        LabelFunc:AutoSize()
+        -- Delay 1 frame để TextBounds update
+        task.defer(function()
+            LabelFunc:AutoSize()
+        end)
     end
 
     CountItem = CountItem + 1
