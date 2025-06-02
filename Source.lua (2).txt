@@ -1404,12 +1404,6 @@ function WazureV1:Start(GuiConfig)
 				LabelFunc.Value = Value
 				LabelText.Text = tostring(Value)
 			end
-			LabelText:GetPropertyChangedSignal("Text"):Connect(function() 
-				LabelFunc:AutoSize() 
-			end)
-			LabelText:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				LabelFunc:AutoSize()
-			end)
 			LabelFunc:Set(tostring(LabelName))
 			Items[LabelName] = LabelFunc
 			CountItem = CountItem + 1
