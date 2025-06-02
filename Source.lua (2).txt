@@ -1337,82 +1337,75 @@ function WazureV1:Start(GuiConfig)
 			return SeperatorFunc
 		end
 		function Items:MakeLabel(LabelName)
-  LabelName = LabelName or "Label"
-  local LabelFunc = { Type = "Label", Value = LabelName }
+			local LabelName = LabelName or "Label"
+			local LabelFunc = {Type = "Label", Value = LabelName}
 
-  local Label = Instance.new("Frame")
-  local LabelFrame = Instance.new("Frame")
-  local UICorner6 = Instance.new("UICorner")
-  local UIStroke2 = Instance.new("UIStroke")
-  local LabelText = Instance.new("TextLabel")
-  local UIStroke3 = Instance.new("UIStroke")
+			local Label = Instance.new("Frame");
+			local LabelFrame = Instance.new("Frame");
+			local UICorner6 = Instance.new("UICorner");
+			local UIStroke2 = Instance.new("UIStroke");
+			local LabelText = Instance.new("TextLabel");
+			local UIStroke3 = Instance.new("UIStroke");
 
-  Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-  Label.BackgroundTransparency = 0.999
-  Label.BorderSizePixel = 0
-  Label.LayoutOrder = CountItem
-  Label.Size = UDim2.new(1, -8, 0, 20)
-  Label.Name = "Label"
-  Label.Parent = ScrollLayers
+			Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Label.BackgroundTransparency = 0.9990000128746033
+			Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			Label.BorderSizePixel = 0
+			Label.LayoutOrder = 1
+			Label.Size = UDim2.new(1, -8, 0, 20)
+			Label.Name = "Label"
+			Label.LayoutOrder = CountItem
+			Label.Parent = ScrollLayers
 
-  LabelFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-  LabelFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-  LabelFrame.BackgroundTransparency = 0.3
-  LabelFrame.BorderSizePixel = 0
-  LabelFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-  LabelFrame.Size = UDim2.new(1, -3, 1, -3)
-  LabelFrame.Name = "LabelFrame"
-  LabelFrame.Parent = Label
+			LabelFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+			LabelFrame.BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871)
+			LabelFrame.BackgroundTransparency = 0.30000001192092896
+			LabelFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			LabelFrame.BorderSizePixel = 0
+			LabelFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+			LabelFrame.Size = UDim2.new(1, -3, 1, -3)
+			LabelFrame.Name = "LabelFrame"
+			LabelFrame.Parent = Label
 
-  UICorner6.CornerRadius = UDim.new(0, 2)
-  UICorner6.Parent = LabelFrame
+			UICorner6.CornerRadius = UDim.new(0, 2)
+			UICorner6.Parent = LabelFrame
 
-  UIStroke2.Color = Color3.fromRGB(60, 60, 60)
-  UIStroke2.Thickness = 1.6
-  UIStroke2.Parent = LabelFrame
+			UIStroke2.Color = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+			UIStroke2.Thickness = 1.600000023841858
+			UIStroke2.Parent = LabelFrame
 
-  LabelText.Font = Enum.Font.Gotham
-  LabelText.Text = ""
-  LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
-  LabelText.TextSize = 14
-  LabelText.TextXAlignment = Enum.TextXAlignment.Left
-  LabelText.TextYAlignment = Enum.TextYAlignment.Top
-  LabelText.BackgroundTransparency = 0.999
-  LabelText.BorderSizePixel = 0
-  LabelText.Position = UDim2.new(0, 3, 0, 2)
-  LabelText.Size = UDim2.new(1, -3, 0, 13)
-  LabelText.Name = "LabelText"
-  LabelText.Parent = LabelFrame
+			LabelText.Font = Enum.Font.Gotham
+			LabelText.Text = ""
+			LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
+			LabelText.TextSize = 14
+			LabelText.TextXAlignment = Enum.TextXAlignment.Left
+			LabelText.TextYAlignment = Enum.TextYAlignment.Top
+			LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			LabelText.BackgroundTransparency = 0.9990000128746033
+			LabelText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			LabelText.BorderSizePixel = 0
+			LabelText.Position = UDim2.new(0, 3, 0, 2)
+			LabelText.Size = UDim2.new(1, -3, 0, 13)
+			LabelText.Name = "LabelText"
+			LabelText.Parent = LabelFrame
 
-  UIStroke3.Color = Color3.fromRGB(255, 255, 255)
-  UIStroke3.Thickness = 0.2
-  UIStroke3.Parent = LabelText
-
-  -- Hàm AutoSize (có thể bỏ nếu không cần)
-  function LabelFunc:AutoSize()
-    LabelText.TextWrapped = false
-    LabelText.Size = UDim2.new(1, 0, 0, 14 + (14 * (LabelText.TextBounds.X // LabelText.AbsoluteSize.X)))
-    LabelText.TextWrapped = true
-    Label.Size = UDim2.new(1, -8, 0, LabelText.TextBounds.Y + 5)
-  end
-
-  -- Hàm Set: gọi để update text
-  function LabelFunc:Set(Value)
+			UIStroke3.Color = Color3.fromRGB(255, 255, 255)
+			UIStroke3.Thickness = 0.20000000298023224
+			UIStroke3.Parent = LabelText
+			function LabelFunc:AutoSize()
+				LabelText.TextWrapped = false
+				LabelText.Size = UDim2.new(1, 0, 0, 14 + (14 * (LabelText.TextBounds.X // LabelText.AbsoluteSize.X)))
+				LabelText.TextWrapped = true
+				Label.Size = UDim2.new(1, -8, 0, LabelText.TextBounds.Y + 5)
+				UpSize2()
+			end
+			function LabelFunc:Set(Value)
     Value = Value or LabelText.Text
     LabelFunc.Value = Value
     LabelText.Text = tostring(Value)
-    -- Gọi AutoSize nếu muốn resize tự động
-    -- self:AutoSize()
-  end
 
-  -- Set lần đầu
-  LabelFunc:Set(LabelName)
-
-  -- Tăng CountItem
-  CountItem = CountItem + 1
-
-  -- Trả về LabelFunc
-  return LabelFunc
+    -- GỌI LUÔN resize ngay sau khi set text mới
+    LabelFunc:AutoSize()
 end
 		function Items:MakeButton(ButtonName, ButtonConfig)
 			local ButtonConfig = ButtonConfig or {}
