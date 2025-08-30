@@ -1864,23 +1864,30 @@ function Items:Slider(SliderConfig)
         SliderConfig.Callback(Value)
     end
 
-    -- cho phép drag trực tiếp
+    local function UpdateFromInput(Input)
+        local SizeScale = math.clamp((Input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1)
+        SliderFunc:Set(SliderConfig.Min + ((SliderConfig.Max - SliderConfig.Min) * SizeScale))
+    end
+
     SliderFrDrag.InputBegan:Connect(function(Input)
-        if Input.UserInputType == Enum.UserInputType.MouseButton1 then 
-            Dragging = true 
-            local SizeScale = math.clamp((Input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1)
-            SliderFunc:Set(SliderConfig.Min + ((SliderConfig.Max - SliderConfig.Min) * SizeScale))
-        end 
+        if Input.UserInputType == Enum.UserInputType.MouseButton1 
+        or Input.UserInputType == Enum.UserInputType.Touch then
+            Dragging = true
+            UpdateFromInput(Input)
+        end
     end)
-    SliderFrDrag.InputEnded:Connect(function(Input) 
-        if Input.UserInputType == Enum.UserInputType.MouseButton1 then 
-            Dragging = false 
-        end 
+
+    UserInputService.InputEnded:Connect(function(Input)
+        if Input.UserInputType == Enum.UserInputType.MouseButton1 
+        or Input.UserInputType == Enum.UserInputType.Touch then
+            Dragging = false
+        end
     end)
+
     UserInputService.InputChanged:Connect(function(Input)
-        if Dragging and Input.UserInputType == Enum.UserInputType.MouseMovement then 
-            local SizeScale = math.clamp((Input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1)
-            SliderFunc:Set(SliderConfig.Min + ((SliderConfig.Max - SliderConfig.Min) * SizeScale)) 
+        if Dragging and (Input.UserInputType == Enum.UserInputType.MouseMovement 
+        or Input.UserInputType == Enum.UserInputType.Touch) then
+            UpdateFromInput(Input)
         end
     end)
 
