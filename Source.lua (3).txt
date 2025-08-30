@@ -1755,7 +1755,7 @@ function sitinklib:Start(GuiConfig)
                 CountItem = CountItem + 1    
                 return ToggleFunc
             end
-            function Items:Slider(SliderConfig)
+function Items:Slider(SliderConfig)
     local SliderConfig = SliderConfig or {}
     SliderConfig.Title = SliderConfig.Title or "Slider"
     SliderConfig.Content = SliderConfig.Content or "Content"
@@ -1776,7 +1776,6 @@ function sitinklib:Start(GuiConfig)
     local UICorner27 = Instance.new("UICorner");
     local SliderFrDrag = Instance.new("Frame");
     local SliderNumber = Instance.new("TextLabel");
-    local SliderBox = Instance.new("TextBox"); -- ô nhập số
 
     Slider.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
     Slider.BorderSizePixel = 0
@@ -1846,15 +1845,6 @@ function sitinklib:Start(GuiConfig)
     SliderNumber.Size = UDim2.new(0, 40, 0, 13)
     SliderNumber.Parent = Slider
 
-    -- Ô nhập số
-    SliderBox.Size = UDim2.new(0, 50, 0, 20)
-    SliderBox.Position = UDim2.new(1, -60, 0.5, -10)
-    SliderBox.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    SliderBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SliderBox.Text = tostring(SliderConfig.Default)
-    SliderBox.ClearTextOnFocus = false
-    SliderBox.Parent = Slider
-
     local Dragging = false
     local function Round(Number, Factor)
         local Result = math.floor(Number/Factor + (math.sign(Number) * 0.5)) * Factor
@@ -1866,18 +1856,20 @@ function sitinklib:Start(GuiConfig)
         Value = math.clamp(Round(Value, SliderConfig.Increment), SliderConfig.Min, SliderConfig.Max)
         SliderFunc.Value = Value
         SliderNumber.Text = tostring(Value)
-        SliderBox.Text = tostring(Value)
         TweenService:Create(
             SliderDrag,
-            TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
             {Size = UDim2.fromScale((Value - SliderConfig.Min) / (SliderConfig.Max - SliderConfig.Min), 1)}
         ):Play()
         SliderConfig.Callback(Value)
     end
 
+    -- cho phép drag trực tiếp
     SliderFrDrag.InputBegan:Connect(function(Input)
         if Input.UserInputType == Enum.UserInputType.MouseButton1 then 
             Dragging = true 
+            local SizeScale = math.clamp((Input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1)
+            SliderFunc:Set(SliderConfig.Min + ((SliderConfig.Max - SliderConfig.Min) * SizeScale))
         end 
     end)
     SliderFrDrag.InputEnded:Connect(function(Input) 
@@ -1889,16 +1881,6 @@ function sitinklib:Start(GuiConfig)
         if Dragging and Input.UserInputType == Enum.UserInputType.MouseMovement then 
             local SizeScale = math.clamp((Input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1)
             SliderFunc:Set(SliderConfig.Min + ((SliderConfig.Max - SliderConfig.Min) * SizeScale)) 
-        end
-    end)
-
-    -- Nhập số trực tiếp
-    SliderBox.FocusLost:Connect(function()
-        local number = tonumber(SliderBox.Text)
-        if number then
-            SliderFunc:Set(number)
-        else
-            SliderBox.Text = tostring(SliderFunc.Value)
         end
     end)
 
