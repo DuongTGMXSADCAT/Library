@@ -1766,21 +1766,21 @@ function Items:Slider(SliderConfig)
     SliderConfig.Callback = SliderConfig.Callback or function() end
     local SliderFunc = {Value = SliderConfig.Default}
 
-    local Slider = Instance.new("Frame");
-    local UICorner25 = Instance.new("UICorner");
-    local SliderContent = Instance.new("TextLabel");
-    local SliderTitle = Instance.new("TextLabel");
-    local SliderFrame = Instance.new("Frame");
-    local UICorner26 = Instance.new("UICorner");
-    local SliderDrag = Instance.new("Frame");
-    local UICorner27 = Instance.new("UICorner");
-    local SliderFrDrag = Instance.new("Frame");
-    local SliderNumber = Instance.new("TextLabel");
+    local Slider = Instance.new("Frame")
+    local UICorner25 = Instance.new("UICorner")
+    local SliderContent = Instance.new("TextLabel")
+    local SliderTitle = Instance.new("TextLabel")
+    local SliderFrame = Instance.new("Frame")
+    local UICorner26 = Instance.new("UICorner")
+    local SliderDrag = Instance.new("Frame")
+    local UICorner27 = Instance.new("UICorner")
+    local SliderFrDrag = Instance.new("Frame")
+    local SliderNumber = Instance.new("TextLabel")
 
     Slider.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
     Slider.BorderSizePixel = 0
     Slider.LayoutOrder = CountItem
-    Slider.Size = UDim2.new(1, -8, 0, 45)
+    Slider.Size = UDim2.new(1, -8, 0, 70) -- cao hơn để chứa nút
     Slider.Name = "Slider"
     Slider.Parent = ScrollLayer1
 
@@ -1811,7 +1811,7 @@ function Items:Slider(SliderConfig)
     SliderFrame.AnchorPoint = Vector2.new(1, 0.5)
     SliderFrame.BackgroundTransparency = 0.8
     SliderFrame.BorderSizePixel = 0
-    SliderFrame.Position = UDim2.new(1, -10, 0.5, 0)
+    SliderFrame.Position = UDim2.new(1, -10, 0, 30)
     SliderFrame.Size = UDim2.new(0, 100, 0, 2)
     SliderFrame.Name = "SliderFrame"
     SliderFrame.Parent = Slider
@@ -1841,7 +1841,7 @@ function Items:Slider(SliderConfig)
     SliderNumber.TextSize = 12
     SliderNumber.TextXAlignment = Enum.TextXAlignment.Right
     SliderNumber.BackgroundTransparency = 1
-    SliderNumber.Position = UDim2.new(1, -115, 0.5, 0)
+    SliderNumber.Position = UDim2.new(1, -115, 0, 30)
     SliderNumber.Size = UDim2.new(0, 40, 0, 13)
     SliderNumber.Parent = Slider
 
@@ -1889,6 +1889,43 @@ function Items:Slider(SliderConfig)
         or Input.UserInputType == Enum.UserInputType.Touch) then
             UpdateFromInput(Input)
         end
+    end)
+
+    -- Thêm 2 nút +/- ở dưới slider
+    local ButtonsFrame = Instance.new("Frame")
+    ButtonsFrame.Size = UDim2.new(0, 100, 0, 20)
+    ButtonsFrame.Position = UDim2.new(1, -10, 0, 45)
+    ButtonsFrame.AnchorPoint = Vector2.new(1, 0)
+    ButtonsFrame.BackgroundTransparency = 1
+    ButtonsFrame.Parent = Slider
+
+    local MinusButton = Instance.new("TextButton")
+    MinusButton.Size = UDim2.new(0.5, -2, 1, 0)
+    MinusButton.Position = UDim2.new(0, 0, 0, 0)
+    MinusButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    MinusButton.Text = "-"
+    MinusButton.TextColor3 = Color3.fromRGB(255,255,255)
+    MinusButton.Font = Enum.Font.GothamBold
+    MinusButton.TextSize = 14
+    MinusButton.Parent = ButtonsFrame
+    Instance.new("UICorner", MinusButton).CornerRadius = UDim.new(0,3)
+
+    local PlusButton = Instance.new("TextButton")
+    PlusButton.Size = UDim2.new(0.5, -2, 1, 0)
+    PlusButton.Position = UDim2.new(0.5, 2, 0, 0)
+    PlusButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    PlusButton.Text = "+"
+    PlusButton.TextColor3 = Color3.fromRGB(255,255,255)
+    PlusButton.Font = Enum.Font.GothamBold
+    PlusButton.TextSize = 14
+    PlusButton.Parent = ButtonsFrame
+    Instance.new("UICorner", PlusButton).CornerRadius = UDim.new(0,3)
+
+    MinusButton.MouseButton1Click:Connect(function()
+        SliderFunc:Set(SliderFunc.Value - SliderConfig.Increment)
+    end)
+    PlusButton.MouseButton1Click:Connect(function()
+        SliderFunc:Set(SliderFunc.Value + SliderConfig.Increment)
     end)
 
     SliderFunc:Set(SliderFunc.Value)
