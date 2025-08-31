@@ -2282,4 +2282,19 @@ end
     end
     return Tabs
 end
+
+-- Toggle UI bằng phím RightShift
+local UserInputService = game:GetService("UserInputService")
+
+UserInputService.InputBegan:Connect(function(input, gpe)
+    if gpe then return end
+    if input.KeyCode == Enum.KeyCode.RightShift then
+        main.Enabled = not main.Enabled
+    end
+end)
+
 return sitinklib
+
+return sitinklib
+
+
