@@ -563,7 +563,7 @@ function sitinklib:Start(GuiConfig)
         GuiConfig.CloseCallBack()
     end)
     
-    if not GuiConfig["Custom Toggle"] then
+    
 		local ToggleOpen = Instance.new("Frame");
 		local OpenButton = Instance.new("TextButton");
 		local UICorner42 = Instance.new("UICorner");
@@ -635,7 +635,7 @@ function sitinklib:Start(GuiConfig)
 			ToggleOpen.Visible = false
 			SitinkGui:ToggleUI()
 		end)
-	end
+	
     --// Tab
     local LayersTab = Instance.new("Frame");
     local ScrollTab = Instance.new("ScrollingFrame");
