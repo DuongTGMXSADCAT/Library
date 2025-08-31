@@ -449,6 +449,8 @@ function sitinklib:Start(GuiConfig)
     local TopDescription = Instance.new("TextLabel");
     local CloseButton = Instance.new("TextButton");
     local CloseImage = Instance.new("ImageLabel");
+    	local HideButton = Instance.new("TextButton");
+	local HideImage = Instance.new("ImageLabel");
     local DropShadowHolder = Instance.new("Frame");
     local DropShadow = Instance.new("ImageLabel");
 
@@ -529,6 +531,34 @@ function sitinklib:Start(GuiConfig)
     CloseImage.Size = UDim2.new(1, -15, 1, -15)
     CloseImage.Name = "CloseImage"
     CloseImage.Parent = CloseButton
+    
+    HideButton.Font = Enum.Font.SourceSans
+	HideButton.Text = ""
+	HideButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+	HideButton.TextSize = 14
+	HideButton.AnchorPoint = Vector2.new(1, 0)
+	HideButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	HideButton.BackgroundTransparency = 0.9990000128746033
+	HideButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	HideButton.BorderSizePixel = 0
+	HideButton.Position = UDim2.new(1, -35, 0, 0)
+	HideButton.Size = UDim2.new(0, 35, 0, 35)
+	HideButton.Name = "HideButton"
+	HideButton.Parent = Top
+
+	HideImage.Image = "rbxassetid://18328656799"
+	HideImage.ImageColor3 = Color3.fromRGB(150.0000062584877, 150.0000062584877, 150.0000062584877)
+	HideImage.AnchorPoint = Vector2.new(0.5, 0.5)
+	HideImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	HideImage.BackgroundTransparency = 0.9990000128746033
+	HideImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	HideImage.BorderSizePixel = 0
+	HideImage.Position = UDim2.new(0.5, 0, 0.5, 0)
+	HideImage.Size = UDim2.new(1, -18, 1, -18)
+	HideImage.Name = "HideImage"
+	HideImage.Parent = HideButton
+
+	
 
     DropShadowHolder.BackgroundTransparency = 1
     DropShadowHolder.BorderSizePixel = 0
