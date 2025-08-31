@@ -658,12 +658,10 @@ function sitinklib:Start(GuiConfig)
 		end)
 		CloseButton.Activated:Connect(function()
 			ToggleOpen.Visible = true
-			sitinklib:ToggleUI()
 			GuiConfig.CloseCallBack()
 		end)
 		OpenButton.Activated:Connect(function()
 			ToggleOpen.Visible = false
-			sitinklib:ToggleUI()
 		end)
 	
     --// Tab
