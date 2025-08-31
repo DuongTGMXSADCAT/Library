@@ -287,18 +287,20 @@ function WazureV1:Notify(NotifyConfig)
 			end
 			waitclose = true
 			TweenService:Create(
-				NotifyFrameReal,
-				TweenInfo.new(tonumber(NotifyConfig.Time), Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-				{Position = UDim2.new(0, 270, 0, 0)}
-			):Play()
+    NotifyFrameReal,
+    TweenInfo.new(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
+    {Position = UDim2.new(0, 270, 0, 0), BackgroundTransparency = 1}
+):Play()
 			task.wait(tonumber(NotifyConfig.Time) / 1.2)
 			NotifyFrame:Destroy()
 		end
-		TweenService:Create(
-			NotifyFrameReal,
-			TweenInfo.new(tonumber(NotifyConfig.Time), Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-			{Position = UDim2.new(0, 0, 0, 0)}
-		):Play()
+		NotifyFrameReal.Position = UDim2.new(0, 270, 0, 0)
+NotifyFrameReal.BackgroundTransparency = 1
+TweenService:Create(
+    NotifyFrameReal,
+    TweenInfo.new(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+    {Position = UDim2.new(0, 0, 0, 0), BackgroundTransparency = 0}
+):Play()
 		task.wait(tonumber(NotifyConfig.Delay))
 		NotifyFunc:Close()
 	end)
@@ -456,8 +458,17 @@ function WazureV1:Start(GuiConfig)
 		AzuGui:Destroy()
 	end
 	function WazureV1:ToggleUI()
-		Main.Visible = not Main.Visible
-	end
+    if Main.Visible then
+        TweenService:Create(Main, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1, Position = Main.Position + UDim2.new(0,0,0,20)}):Play()
+        task.wait(0.35)
+        Main.Visible = false
+    else
+        Main.Visible = true
+        Main.BackgroundTransparency = 1
+        Main.Position = Main.Position + UDim2.new(0,0,0,20)
+        TweenService:Create(Main, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0, Position = Main.Position - UDim2.new(0,0,0,20)}):Play()
+    end
+end
 	if not GuiConfig["Custom Toggle"] then
 		local ToggleOpen = Instance.new("Frame");
 		local OpenButton = Instance.new("TextButton");
@@ -937,14 +948,22 @@ function WazureV1:Start(GuiConfig)
 			end
 		end)
 		local function EnterMouseGUI(frameenter)
-			local old = frameenter.BackgroundColor3
-			frameenter.MouseEnter:Connect(function()
-				TweenService:Create(
-					frameenter,
-					TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-					{BackgroundColor3 = Color3.fromRGB((old.R * 255) + 10, (old.G * 255) + 10, (old.B * 255) + 10)}
-				):Play()
-			end)
+    local old = frameenter.BackgroundColor3
+    frameenter.MouseEnter:Connect(function()
+        TweenService:Create(
+            frameenter,
+            TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+            {BackgroundColor3 = old:lerp(GuiConfig["Color"], 0.3), Size = frameenter.Size + UDim2.new(0,3,0,3)}
+        ):Play()
+    end)
+    frameenter.MouseLeave:Connect(function()
+        TweenService:Create(
+            frameenter,
+            TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+            {BackgroundColor3 = old, Size = frameenter.Size - UDim2.new(0,3,0,3)}
+        ):Play()
+    end)
+end
 			frameenter.MouseLeave:Connect(function()
 				TweenService:Create(
 					frameenter,
@@ -1128,10 +1147,10 @@ function WazureV1:Start(GuiConfig)
 								{BackgroundColor3 = GuiConfig.Color} 
 							):Play()
 							TweenService:Create(
-								AnotherSwitchImage,
-								TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-								{Position = UDim2.new(0, 20, 0, 0), ImageColor3 = Color3.fromRGB(255, 255, 255)}
-							):Play()
+    AnotherSwitchImage,
+    TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Position = UDim2.new(Value and 0 or 1, Value and 20 or 0, 0, 0), ImageColor3 = Value and Color3.fromRGB(255,255,255) or Color3.fromRGB(72,73,74)}
+):Play()
 						else
 							TweenService:Create(
 								AnotherToggleButton,
