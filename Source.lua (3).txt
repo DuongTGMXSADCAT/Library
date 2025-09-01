@@ -1439,12 +1439,7 @@ function sitinklib:Start(GuiConfig)
                 ParagraphTitle.Parent = Paragraph
 
                 function ParagraphFunc:Set(Value)
-                    local Value = Value or {}
-                    Value.Title = Value.Title or ParagraphTitle.Text
-                    Value.Content = Value.Content or ParagraphContent.Text
-
-                    ParagraphTitle.Text = Value.Title or ParagraphTitle.Text
- ParagraphContent.Text = Value.Content or ParagraphContent.Text
+                    ParagraphTitle.Text = Value
 
                     if ParagraphContent.Text == "" then
                         Paragraph.Size = UDim2.new(1, -8, 0, 33)
