@@ -1441,14 +1441,17 @@ function sitinklib:Start(GuiConfig)
                 function ParagraphFunc:Set(Value)
     Value = Value or {}
 
-    if Value.Title then
+    -- Chỉ set khi có Title mới, nếu không thì giữ nguyên
+    if Value.Title ~= nil then
         ParagraphTitle.Text = Value.Title
     end
     
-    if Value.Content then
+    -- Chỉ set khi có Content mới, nếu không thì giữ nguyên
+    if Value.Content ~= nil then
         ParagraphContent.Text = Value.Content
     end
 
+    -- Update size
     if ParagraphContent.Text == "" then
         Paragraph.Size = UDim2.new(1, -8, 0, 33)
     else
