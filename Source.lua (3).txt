@@ -657,14 +657,15 @@ function sitinklib:Start(GuiConfig)
 		
 		HideButton.Activated:Connect(function()
 			ToggleOpen.Visible = true
-			SitinkGui:ToggleUI()
+			Main.Visible = false
 		end)
 		CloseButton.Activated:Connect(function()
 			ToggleOpen.Visible = true
 			GuiConfig.CloseCallBack()
 		end)
 		OpenButton.Activated:Connect(function()
-			ToggleOpen.Visible = true
+			ToggleOpen.Visible = false
+			Main.Visible = true
 		end)
 	
     
