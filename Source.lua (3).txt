@@ -1439,20 +1439,28 @@ function sitinklib:Start(GuiConfig)
                 ParagraphTitle.Parent = Paragraph
 
                 function ParagraphFunc:Set(Value)
-                    ParagraphTitle.Text = Value
+    Value = Value or {}
 
-                    if ParagraphContent.Text == "" then
-                        Paragraph.Size = UDim2.new(1, -8, 0, 33)
-                    else
-                        ParagraphContent.TextWrapped = false
-                        ParagraphContent.Size = UDim2.new(1, -150, 0, 11 + (11 * (ParagraphContent.TextBounds.X // ParagraphContent.AbsoluteSize.X)))
-                        Paragraph.Size = UDim2.new(1, -8, 0, ParagraphContent.AbsoluteSize.Y + 33)
-                        ParagraphContent.TextWrapped = true
-                    end
-                end
-                CountItem = CountItem + 1
-                return ParagraphFunc
-            end
+    if Value.Title then
+        ParagraphTitle.Text = Value.Title
+    end
+    
+    if Value.Content then
+        ParagraphContent.Text = Value.Content
+    end
+
+    if ParagraphContent.Text == "" then
+        Paragraph.Size = UDim2.new(1, -8, 0, 33)
+    else
+        ParagraphContent.TextWrapped = false
+        ParagraphContent.Size = UDim2.new(
+            1, -150,
+            0, 11 + (11 * (ParagraphContent.TextBounds.X // ParagraphContent.AbsoluteSize.X))
+        )
+        Paragraph.Size = UDim2.new(1, -8, 0, ParagraphContent.AbsoluteSize.Y + 33)
+        ParagraphContent.TextWrapped = true
+    end
+end
             function Items:Button(ButtonConfig)
                 local ButtonConfig = ButtonConfig or {}
                 ButtonConfig.Title = ButtonConfig.Title or "Button"
